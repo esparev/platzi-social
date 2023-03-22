@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
+const response = require('./network/response');
 
 const app = express();
 app.use(bodyParser.json());
@@ -8,13 +9,16 @@ app.use(router);
 
 router.get('/messages', (req, res) => {
   console.log(req.headers);
-  res.send('Messages list');
+  response.success(req, res, 'Messages list', 200);
 });
 
 router.post('/messages', (req, res) => {
   console.log(req.body);
-  console.log(req.query);
-  res.send(`Added "${req.body.message}" message`);
+  if (req.query.error == 'ok') {
+    response.error(req, res, 'Simulated error', 400);
+  } else {
+    response.success(req, res, 'Correct response', 201);
+  }
 });
 
 app.listen(3000, () => {
