@@ -1,8 +1,9 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const router = express.Router();
 
 const app = express();
-
+app.use(bodyParser.json());
 app.use(router);
 
 router.get('/messages', (req, res) => {
@@ -10,7 +11,9 @@ router.get('/messages', (req, res) => {
 });
 
 router.post('/messages', (req, res) => {
-  res.send('Added message');
+  console.log(req.body);
+  console.log(req.query);
+  res.send(`Added "${req.body.message}" message`);
 });
 
 app.listen(3000, () => {
