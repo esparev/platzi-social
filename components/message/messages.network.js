@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const response = require('../../network/network.response');
+const controller = require('./messages.controller.js');
 
 router.get('/', (req, res) => {
   console.log(req.headers);
@@ -8,12 +9,14 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log(req.body);
-  if (req.query.error == 'ok') {
-    response.error(req, res, 'Simulated error', 400);
-  } else {
-    response.success(req, res, 'Correct response', 201);
-  }
+  controller
+    .addMessage(req.body.user, req.body.message)
+    .then((fullMessage) => {
+      response.success(req, res, fullMessage, 201);
+    })
+    .catch(() => {
+      response.error(req, res, 'Invalid information', 400);
+    });
 });
 
 module.exports = router;
