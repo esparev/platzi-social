@@ -7,6 +7,7 @@ app.use(bodyParser.json());
 app.use(router);
 
 router.get('/messages', (req, res) => {
+  console.log(req.headers);
   res.send('Messages list');
 });
 
