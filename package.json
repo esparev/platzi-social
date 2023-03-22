@@ -1,0 +1,19 @@
+{
+  "name": "platzi-social",
+  "version": "0.1.0",
+  "description": "Un chat como telegram, pero mucho mejor",
+  "main": "server.js",
+  "scripts": {
+    "server": "nodemon server"
+  },
+  "keywords": [
+    "chat",
+    "telegram",
+    "server"
+  ],
+  "author": "JoseMa Esparev <jm.esparev@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
