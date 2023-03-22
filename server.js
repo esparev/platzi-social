@@ -21,6 +21,8 @@ router.post('/messages', (req, res) => {
   }
 });
 
+app.use('/app', express.static('public'));
+
 app.listen(3000, () => {
   console.log('Server listening on http://localhost:3000');
 });
