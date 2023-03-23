@@ -18,4 +18,12 @@ function addMessage(message) {
   myMessage.save();
 }
 
-module.exports = { list: getMessages, add: addMessage };
+async function updateMessage(id, message) {
+  const myMessage = await MessageModel.findOne({ _id: id });
+
+  myMessage.message = message;
+  const editedMessage = await myMessage.save();
+  return editedMessage;
+}
+
+module.exports = { list: getMessages, add: addMessage, update: updateMessage };
