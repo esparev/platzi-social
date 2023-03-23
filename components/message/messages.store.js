@@ -9,8 +9,12 @@ db.connect('mongodb://root:admin@localhost:27017/?authMechanism=DEFAULT', {
 
 console.log('[db] Successfully connected');
 
-async function getMessages() {
-  return MessageModel.find();
+async function getMessages(filterUser) {
+  let filter = {};
+  if (filterUser !== null) {
+    filter = { user: filterUser };
+  }
+  return MessageModel.find(filter);
 }
 
 function addMessage(message) {
