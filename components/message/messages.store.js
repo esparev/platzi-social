@@ -14,12 +14,12 @@ async function getMessages(filterUser) {
   if (filterUser !== null) {
     filter = { user: filterUser };
   }
-  return MessageModel.find(filter);
+  return await MessageModel.find(filter);
 }
 
-function addMessage(message) {
+async function addMessage(message) {
   const myMessage = new MessageModel(message);
-  myMessage.save();
+  await myMessage.save();
 }
 
 async function updateMessage(id, message) {
@@ -30,8 +30,8 @@ async function updateMessage(id, message) {
   return editedMessage;
 }
 
-function deleteMessage(id) {
-  return MessageModel.deleteOne({ _id: id });
+async function deleteMessage(id) {
+  return await MessageModel.deleteOne({ _id: id });
 }
 
 module.exports = {

@@ -1,13 +1,13 @@
 const store = require('./messages.store');
 
 function getMessages(filterUser) {
-  return new Promise((resolve, reject) => {
-    resolve(store.list(filterUser));
+  return new Promise(async (resolve, reject) => {
+    resolve(await store.list(filterUser));
   });
 }
 
 function addMessage(user, message) {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     if (!user || !message) {
       console.error('[messageController] There is no user or message');
       reject('The data are incorrect');
@@ -20,7 +20,7 @@ function addMessage(user, message) {
       date: new Date(),
     };
 
-    store.add(fullMessage);
+    await store.add(fullMessage);
     resolve(fullMessage);
   });
 }
@@ -38,13 +38,13 @@ function updateMessage(id, message) {
 }
 
 function deleteMessage(id) {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     if (!id) {
       reject('Invalid data');
       return false;
     }
 
-    store
+    await store
       .delete(id)
       .then(() => {
         resolve();
