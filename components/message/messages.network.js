@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
       response.success(req, res, messageList, 200);
     })
     .catch((err) => {
-      response.error(req, res, 'Unexpected error', 500);
+      response.error(req, res, 'Unexpected error', 500, err);
     });
 });
 
@@ -20,8 +20,8 @@ router.post('/', (req, res) => {
     .then((fullMessage) => {
       response.success(req, res, fullMessage, 201);
     })
-    .catch(() => {
-      response.error(req, res, 'Invalid information', 400);
+    .catch((err) => {
+      response.error(req, res, 'Invalid information', 400, err);
     });
 });
 
