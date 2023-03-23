@@ -4,8 +4,14 @@ const response = require('../../network/network.response');
 const controller = require('./messages.controller.js');
 
 router.get('/', (req, res) => {
-  console.log(req.headers);
-  response.success(req, res, 'Messages list', 200);
+  controller
+    .getMessages()
+    .then((messageList) => {
+      response.success(req, res, messageList, 200);
+    })
+    .catch((err) => {
+      response.error(req, res, 'Unexpected error', 500);
+    });
 });
 
 router.post('/', (req, res) => {
