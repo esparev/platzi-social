@@ -1,11 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const networkRouter = require('./network/network.router');
+const db = require('./db');
+const router = require('./network/network.router');
+
+db('mongodb://root:admin@localhost:27017/?authMechanism=DEFAULT');
 
 const app = express();
 app.use(bodyParser.json());
 
-networkRouter(app);
+router(app);
 
 app.use('/app', express.static('public'));
 
