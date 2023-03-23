@@ -10,7 +10,8 @@ function addMessage(user, message) {
   return new Promise((resolve, reject) => {
     if (!user || !message) {
       console.error('[messageController] There is no user or message');
-      return reject('The data are incorrect');
+      reject('The data are incorrect');
+      return false;
     }
 
     const fullMessage = {
@@ -36,4 +37,22 @@ function updateMessage(id, message) {
   });
 }
 
-module.exports = { getMessages, addMessage, updateMessage };
+function deleteMessage(id) {
+  return new Promise((resolve, reject) => {
+    if (!id) {
+      reject('Invalid data');
+      return false;
+    }
+
+    store
+      .delete(id)
+      .then(() => {
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
+module.exports = { getMessages, addMessage, updateMessage, deleteMessage };

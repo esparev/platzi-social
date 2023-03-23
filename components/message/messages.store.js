@@ -30,4 +30,13 @@ async function updateMessage(id, message) {
   return editedMessage;
 }
 
-module.exports = { list: getMessages, add: addMessage, update: updateMessage };
+function deleteMessage(id) {
+  return MessageModel.deleteOne({ _id: id });
+}
+
+module.exports = {
+  list: getMessages,
+  add: addMessage,
+  update: updateMessage,
+  delete: deleteMessage,
+};
