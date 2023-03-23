@@ -10,7 +10,7 @@ function addMessage(user, message) {
   return new Promise(async (resolve, reject) => {
     if (!user || !message) {
       console.error('[messageController] There is no user or message');
-      reject('The data are incorrect');
+      reject('The data is incorrect');
       return false;
     }
 
@@ -28,6 +28,7 @@ function addMessage(user, message) {
 function updateMessage(id, message) {
   return new Promise(async (resolve, reject) => {
     if (!id || !message) {
+      console.error('[messageController] There is no id or message');
       reject('Invalid data');
       return false;
     }
@@ -40,6 +41,7 @@ function updateMessage(id, message) {
 function deleteMessage(id) {
   return new Promise(async (resolve, reject) => {
     if (!id) {
+      console.error('[messageController] There is no id');
       reject('Invalid data');
       return false;
     }

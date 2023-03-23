@@ -37,6 +37,7 @@ function updateUser(id, name) {
 function deleteUser(id) {
   return new Promise(async (resolve, reject) => {
     if (!id) {
+      console.error('[userController] There is no id');
       reject('Invalid data');
       return false;
     }
