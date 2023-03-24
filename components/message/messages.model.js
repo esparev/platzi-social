@@ -7,6 +7,7 @@ const messageSchema = new Schema({
   user: { type: Schema.ObjectId, ref: 'user', required: true },
   message: { type: String, required: true },
   date: Date,
+  file: String,
 });
 
 const MessageModel = mongoose.model('message', messageSchema);

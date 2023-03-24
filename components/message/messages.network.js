@@ -1,7 +1,19 @@
 const express = require('express');
+const multer = require('multer');
 const router = express.Router();
 const response = require('../../network/network.response');
 const controller = require('./messages.controller.js');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/static');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 router.get('/', (req, res) => {
   const filterMessages = req.query.chat || null;
@@ -15,9 +27,9 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', upload.single('file'), (req, res) => {
   controller
-    .addMessage(req.body.chat, req.body.user, req.body.message)
+    .addMessage(req.body.chat, req.body.user, req.body.message, req.file)
     .then((data) => {
       response.success(req, res, data, 201);
     })

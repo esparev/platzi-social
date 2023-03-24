@@ -6,7 +6,7 @@ function getMessages(filterChat) {
   });
 }
 
-function addMessage(chat, user, message) {
+function addMessage(chat, user, message, file) {
   return new Promise(async (resolve, reject) => {
     if (!chat || !user || !message) {
       console.error('[messageController] There is no chat, user or message');
@@ -14,11 +14,17 @@ function addMessage(chat, user, message) {
       return false;
     }
 
+    let fileUrl = '';
+    if (file) {
+      fileUrl = `http://localhost:3000/app/static/${file.filename}`;
+    }
+
     const fullMessage = {
       chat: chat,
       user: user,
       message: message,
       date: new Date(),
+      file: fileUrl,
     };
 
     await store.add(fullMessage);
