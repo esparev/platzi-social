@@ -1,10 +1,10 @@
 const MessageModel = require('./messages.model');
 
-function getMessages(filterUser) {
+function getMessages(filterChat) {
   return new Promise((resolve, reject) => {
     let filter = {};
-    if (filterUser !== null) {
-      filter = { user: filterUser };
+    if (filterChat !== null) {
+      filter = { chat: filterChat };
     }
     MessageModel.find(filter)
       .populate('user')
