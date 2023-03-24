@@ -1,11 +1,22 @@
 const MessageModel = require('./messages.model');
 
-async function getMessages(filterUser) {
-  let filter = {};
-  if (filterUser !== null) {
-    filter = { user: filterUser };
-  }
-  return await MessageModel.find(filter);
+function getMessages(filterUser) {
+  return new Promise((resolve, reject) => {
+    let filter = {};
+    if (filterUser !== null) {
+      filter = { user: filterUser };
+    }
+    MessageModel.find(filter)
+      .populate('user')
+      .exec((err, populated) => {
+        if (err) {
+          reject(err);
+          return false;
+        }
+
+        resolve(populated);
+      });
+  });
 }
 
 async function addMessage(message) {
